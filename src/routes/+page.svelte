@@ -1,4 +1,5 @@
 <script>
+        import Blender from "$lib/blender.svelte";
         import {
                 Header,
                 HeaderNav,
@@ -16,18 +17,25 @@
                 Row,
                 Column,
                 Tag,
+                TextInput,
+                HeaderPanelDivider,
+                Loading,
         } from "carbon-components-svelte";
+        let fetchJson = fetch("http://localhost:8000/cms/landing_page").then(
+                (res) => res.json(),
+        );
 </script>
 
-
-        <Grid>
-                <Row>
-                        <h1>Welcome</h1>
-                </Row>
-                <Row>
-                        <Column noGutter>
-                                <h3>To jest h3</h3>
-                                <p>I piszemy cos normalnego</p>
-                                </Column>
-                </Row>
-        </Grid>
+<Grid>
+        <Row>
+                <Column noGutter>
+                        <h1>Landing Page</h1>
+                        <HeaderPanelDivider />
+                </Column>
+        </Row>
+        {#await fetchJson}
+                <Loading/>
+        {:then result}
+                <Blender {result} />
+        {/await}
+</Grid>

@@ -16,12 +16,21 @@
                 Row,
                 Column,
                 Tag,
+                HeaderUtilities,
+                HeaderGlobalAction,
         } from "carbon-components-svelte";
         import {
+                ContentView,
+                Logout,
+                Save,
+                SettingsAdjust,
+                UserAvatarFilledAlt,
                 WatsonHealthStackedScrolling_1,
                 WatsonHealthStackedScrolling_2,
         } from "carbon-icons-svelte";
-
+        import { globalState } from "$lib/state.js"
+    import { get } from "svelte/store";
+        
         let isSideNavOpen = false;
 </script>
 
@@ -29,6 +38,20 @@
         <svelte:fragment slot="skip-to-content">
                 <SkipToContent />
         </svelte:fragment>
+
+        <HeaderUtilities>
+                <HeaderGlobalAction
+                        type="submit"
+                        form="update-form"
+                        iconDescription="Save"
+                        tooltipAlignment="start"
+                        icon={Save}
+                />
+                <HeaderGlobalAction
+                        iconDescription="Preview"
+                        icon={ContentView}
+                />
+        </HeaderUtilities>
 </Header>
 
 <SideNav bind:isOpen={isSideNavOpen}>
@@ -52,5 +75,5 @@
 </SideNav>
 
 <Content>
-        <slot/>
+        <slot />
 </Content>
