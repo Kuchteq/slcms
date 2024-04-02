@@ -1,9 +1,7 @@
 import { writable } from "svelte/store";
 
 const globalState = writable({
-        savefunc: () => {
-                console.log("kurwa");
-        }
+        editMode:false
 });
 
 console.log("gets reexecuted")

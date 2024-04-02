@@ -27,6 +27,7 @@
                 UserAvatarFilledAlt,
                 WatsonHealthStackedScrolling_1,
                 WatsonHealthStackedScrolling_2,
+                Settings
         } from "carbon-icons-svelte";
         import { globalState } from "$lib/state.js"
     import { get } from "svelte/store";
@@ -50,6 +51,10 @@
                 <HeaderGlobalAction
                         iconDescription="Preview"
                         icon={ContentView}
+                />
+                <HeaderGlobalAction
+                        iconDescription="Edit"
+                        icon={Settings}
                 />
         </HeaderUtilities>
 </Header>
