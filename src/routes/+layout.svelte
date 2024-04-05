@@ -1,4 +1,7 @@
 <script>
+        // @ts-nocheck
+
+        import "carbon-components-svelte/css/white.css";
         import {
                 Header,
                 HeaderNav,
@@ -14,10 +17,20 @@
                 Content,
                 Grid,
                 Row,
+                HeaderPanelLink,
                 Column,
                 Tag,
                 HeaderUtilities,
                 HeaderGlobalAction,
+                OverflowMenuItem,
+                OverflowMenu,
+                Modal,
+                Select,
+                TextInput,
+                SelectItem,
+                HeaderAction,
+                HeaderPanelLinks,
+                HeaderPanelDivider,
         } from "carbon-components-svelte";
         import {
                 ContentView,
@@ -27,12 +40,21 @@
                 UserAvatarFilledAlt,
                 WatsonHealthStackedScrolling_1,
                 WatsonHealthStackedScrolling_2,
-                Settings
+                Settings,
+                AssetConfirm,
+                Add,
         } from "carbon-icons-svelte";
-        import { globalState } from "$lib/state.js"
-    import { get } from "svelte/store";
-        
+        import {
+                globalState,
+                moveMode,
+                elementModalOpen,
+                elementModalType,
+        } from "$lib/state.js";
+        import { get } from "svelte/store";
+        import ElementModal from "$lib/ElementModal.svelte";
+
         let isSideNavOpen = false;
+        let open = true;
 </script>
 
 <Header company="Kocia Kuchnia" platformName="SLCMS" bind:isSideNavOpen>
@@ -42,20 +64,39 @@
 
         <HeaderUtilities>
                 <HeaderGlobalAction
+                        iconDescription="Preview"
+                        icon={ContentView}
+                />
+                <HeaderGlobalAction
                         type="submit"
                         form="update-form"
                         iconDescription="Save"
                         tooltipAlignment="start"
                         icon={Save}
                 />
-                <HeaderGlobalAction
-                        iconDescription="Preview"
-                        icon={ContentView}
-                />
-                <HeaderGlobalAction
-                        iconDescription="Edit"
-                        icon={Settings}
-                />
+                <HeaderAction icon={Add}>
+                        <HeaderPanelLinks>
+                                <HeaderPanelDivider
+                                        >Add element</HeaderPanelDivider
+                                >
+                                <HeaderPanelLink
+                                        on:click={() => {
+                                                elementModalOpen.set(true);
+                                                elementModalType.set(
+                                                        "short_text",
+                                                );
+                                        }}>Short Text</HeaderPanelLink
+                                >
+                                <HeaderPanelLink
+                                        on:click={() => {
+                                                elementModalOpen.set(true);
+                                                elementModalType.set(
+                                                        "composite",
+                                                );
+                                        }}>Composite</HeaderPanelLink
+                                >
+                        </HeaderPanelLinks>
+                </HeaderAction>
         </HeaderUtilities>
 </Header>
 
@@ -78,6 +119,8 @@
                 <SideNavLink text="Products" />
         </SideNavItems>
 </SideNav>
+
+<ElementModal />
 
 <Content>
         <slot />

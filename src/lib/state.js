@@ -1,9 +1,17 @@
 import { writable } from "svelte/store";
 
 const globalState = writable({
-        editMode:false
+        moveMode:false,
+        targets:[]
 });
 
-console.log("gets reexecuted")
+const moveMode = writable(false);
+const addMode = writable(false);
 
-export { globalState }
+
+const elementModalOpen = writable();
+const elementModalType = writable();
+const elementModalFields = writable();
+
+
+export { globalState, moveMode, elementModalOpen, elementModalType, elementModalFields, addMode }
