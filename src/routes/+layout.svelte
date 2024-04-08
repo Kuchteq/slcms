@@ -4,57 +4,35 @@
         import "carbon-components-svelte/css/white.css";
         import {
                 Header,
-                HeaderNav,
-                HeaderNavItem,
-                HeaderNavMenu,
                 SideNav,
                 SideNavItems,
-                SideNavMenu,
-                SideNavMenuItem,
                 SideNavLink,
                 SideNavDivider,
                 SkipToContent,
                 Content,
-                Grid,
-                Row,
                 HeaderPanelLink,
-                Column,
                 Tag,
                 HeaderUtilities,
                 HeaderGlobalAction,
-                OverflowMenuItem,
-                OverflowMenu,
-                Modal,
-                Select,
-                TextInput,
-                SelectItem,
                 HeaderAction,
                 HeaderPanelLinks,
                 HeaderPanelDivider,
         } from "carbon-components-svelte";
         import {
                 ContentView,
-                Logout,
                 Save,
-                SettingsAdjust,
-                UserAvatarFilledAlt,
                 WatsonHealthStackedScrolling_1,
                 WatsonHealthStackedScrolling_2,
-                Settings,
-                AssetConfirm,
                 Add,
         } from "carbon-icons-svelte";
         import {
-                globalState,
-                moveMode,
                 elementModalOpen,
                 elementModalType,
         } from "$lib/state.js";
-        import { get } from "svelte/store";
         import ElementModal from "$lib/ElementModal.svelte";
 
         let isSideNavOpen = false;
-        let open = true;
+        export let data;
 </script>
 
 <Header company="Kocia Kuchnia" platformName="SLCMS" bind:isSideNavOpen>
@@ -103,9 +81,9 @@
 <SideNav bind:isOpen={isSideNavOpen}>
         <SideNavItems>
                 <Tag icon={WatsonHealthStackedScrolling_1} size="sm">Pages</Tag>
-                <SideNavLink text="Landing Page" />
-                <SideNavLink text="About Us" />
-                <SideNavLink text="Recipes" />
+                {#each data.pages as page}
+                        <SideNavLink text={page.name} href = {`/pages/${page.name}`}/>
+                {/each}
                 <!-- <SideNavMenu text="Menu"> 
                          <SideNavMenuItem href="/" text="Link 1" /> 
                          <SideNavMenuItem href="/" text="Link 2" /> 

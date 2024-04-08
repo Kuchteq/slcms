@@ -30,7 +30,10 @@ func main() {
 	auth := r.Group("/auth")
 	cms := r.Group("/cms")
         cms.GET("/landing_page", ServeLandingPage)
+        cms.GET("/pages/:id", ServePage)
+        cms.POST("/pages/:id", UpdatePage)
         cms.POST("/landing_page", UpdateLandingPage)
+        cms.GET("/pages_index", GetPagesIndex)
 
 	auth.Use(authMiddleware.MiddlewareFunc())
 	// Refresh time can be longer than token timeout

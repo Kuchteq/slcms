@@ -12,6 +12,7 @@ const addMode = writable(false);
 const elementModalOpen = writable();
 const elementModalType = writable();
 const elementModalFields = writable();
+const draggingNow = writable()
 
 
-export { globalState, moveMode, elementModalOpen, elementModalType, elementModalFields, addMode }
+export { globalState, moveMode, elementModalOpen, elementModalType, elementModalFields, addMode, draggingNow}

@@ -18,13 +18,13 @@ const getSpotFromRef = (arr, ref) => {
 
 }
 function removeRefs(obj, keysToKeep) {
-  for (const prop in obj) {
-    if (!keysToKeep.includes(prop) && prop !== 'refs') {
-      delete obj[prop];
-    } else if (typeof obj[prop] === 'object') {
-      removeRefs(obj[prop], keysToKeep);
-    }
-  }
+        for (const prop in obj) {
+                if (!keysToKeep.includes(prop) && prop !== 'refs') {
+                        delete obj[prop];
+                } else if (typeof obj[prop] === 'object') {
+                        removeRefs(obj[prop], keysToKeep);
+                }
+        }
 }
 function extractRefs(dataArray) {
         const refs = [];
@@ -60,6 +60,14 @@ function extractRefs(dataArray) {
 //         // );
 //         return array;
 // }
+const moveField = (array, source, destBefore, bias) => {
+        let place = array.findIndex(item => item.id === source.id)
+        if (place != -1) {
+                array.splice(place, 1)
+                place = array.findIndex(item => item.id === destBefore.id)
+                array.splice(place+bias, 0, source)
+        }
+}
 function moveObjectBeforea(array, refToMove, refToMoveBefore) {
         // Find the index of the object to be moved
         const indexToMove = array.findIndex(
@@ -100,4 +108,4 @@ function moveObjectBeforea(array, refToMove, refToMoveBefore) {
         }
         return array;
 }
-export { extractRefs, moveObjectBeforea, getSpotFromRef, removeRefs }
+export { extractRefs, moveObjectBeforea, getSpotFromRef, removeRefs, moveField  }
